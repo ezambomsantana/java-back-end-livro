@@ -1,25 +1,37 @@
 package com.santana.java.back.end.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.santana.java.back.end.dto.UserDTO;
+import com.santana.java.back.end.service.UserService;
 
 @RestController
 public class UserController {
-	@RequestMapping("/")
-	public String home() {
-		return "Spring boot is working!";
-
+	
+	@Autowired
+	private UserService userService;
+		
+	@GetMapping("/users")
+	public List<UserDTO> getUsers() {		
+		List<UserDTO> usuarios = userService.getAll();		
+		return usuarios;
 	}
 	
-	@RequestMapping("/user")
-	public UserDTO getUser() {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setNome("Eduardo");
-		
-		return userDTO;
-
+	@GetMapping("/user/{id}")
+	UserDTO one(@PathVariable Long id) {
+	    return userService.findById(id);
+	}
+	
+	@PostMapping("/newUser")
+	UserDTO newUser(@RequestBody UserDTO userDTO) {		
+	    return userService.save(userDTO);
 	}
 		
 }
