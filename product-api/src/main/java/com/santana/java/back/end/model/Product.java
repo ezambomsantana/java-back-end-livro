@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import com.santana.java.back.end.dto.ProductDTO;
 
-@Entity(name="user")
+@Entity(name="product")
 public class Product {
 	
 	@Id
@@ -16,9 +16,9 @@ public class Product {
 	
 	private String nome;
 	
-	private String cpf;
+	private String sku;
 	
-	private String endereco;
+	private Float preco;
 
 	public long getId() {
 		return id;
@@ -35,29 +35,29 @@ public class Product {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
 	
-	public static Product convert(ProductDTO userDTO) {
-		Product user = new Product();
-		user.setNome(userDTO.getNome());
-		user.setEndereco(userDTO.getEndereco());
-		user.setCpf(userDTO.getCpf());
-		return user;
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+
+	public static Product convert(ProductDTO productDTO) {
+		Product product = new Product();
+		product.setNome(productDTO.getNome());
+		product.setPreco(productDTO.getPreco());
+		product.setSku(productDTO.getSku());
+		return product;
 	}
 
 }

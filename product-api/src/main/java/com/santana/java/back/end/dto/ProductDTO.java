@@ -5,8 +5,8 @@ import com.santana.java.back.end.model.Product;
 public class ProductDTO {
 
 	private String nome;
-	private String cpf;
-	private String endereco;
+	private String sku;
+	private Float preco;
 
 	public String getNome() {
 		return nome;
@@ -15,29 +15,29 @@ public class ProductDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
 	
-	public static ProductDTO convert(Product user) {
-		ProductDTO userDTO = new ProductDTO();
-		userDTO.setNome(user.getNome());
-		userDTO.setEndereco(user.getEndereco());
-		userDTO.setCpf(user.getCpf());
-		return userDTO;
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+
+	public static ProductDTO convert(Product product) {
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setNome(product.getNome());
+		productDTO.setPreco(product.getPreco());
+		productDTO.setSku(product.getSku());
+		return productDTO;
 	}
 	
 }
