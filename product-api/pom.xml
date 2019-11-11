@@ -32,4 +32,20 @@
 		</dependency>
 	</dependencies>
 
+	<properties>
+		<docker.image.prefix>springio</docker.image.prefix>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.9</version>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

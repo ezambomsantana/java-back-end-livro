@@ -17,11 +17,17 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
-	
+		
 	public List<ProductDTO> getAll() {
 		List<Product> products = productRepository.findAll();
 		return products.stream().map(ProductDTO::convert).collect(Collectors.toList());		
 	}
+	
+	public List<ProductDTO> getProductByCategoryId(Long categoryId) {
+		List<Product> products = productRepository.getProductByCategory(categoryId);
+		return products.stream().map(ProductDTO::convert).collect(Collectors.toList());		
+	}
+	
 	
 	public ProductDTO findById(long ProductId) {
 		Optional<Product> usuario = productRepository.findById(ProductId);
@@ -32,6 +38,7 @@ public class ProductService {
 	}
 	
 	public ProductDTO save(ProductDTO productDTO) {
+				
 		Product product = productRepository.save(Product.convert(productDTO));
 		return ProductDTO.convert(product);
 	}

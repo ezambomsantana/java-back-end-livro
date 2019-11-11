@@ -7,5 +7,5 @@ import com.santana.java.back.end.model.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-	
+		
 }

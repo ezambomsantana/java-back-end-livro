@@ -22,9 +22,15 @@ public class ProductController {
 	private ProductService productService;
 		
 	@GetMapping("/product")
-	public List<ProductDTO> getUsers() {		
-		List<ProductDTO> usuarios = productService.getAll();		
-		return usuarios;
+	public List<ProductDTO> getProducts() {		
+		List<ProductDTO> produtos = productService.getAll();		
+		return produtos;
+	}
+	
+	@GetMapping("/product/{category-id}")
+	public List<ProductDTO> getProductByCategory(@PathVariable Long categoryId) {		
+		List<ProductDTO> produtos = productService.getProductByCategoryId(categoryId);		
+		return produtos;
 	}
 	
 	@GetMapping("/product/{id}")
@@ -33,7 +39,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/newProduct")
-	ProductDTO newUser(@RequestBody ProductDTO userDTO) {		
+	ProductDTO newProduct(@RequestBody ProductDTO userDTO) {		
 	    return productService.save(userDTO);
 	}
 		

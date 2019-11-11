@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.santana.java.back.end.dto.ProductDTO;
 
@@ -15,10 +17,12 @@ public class Product {
 	private long id;
 	
 	private String nome;
-	
-	private String sku;
-	
+		
 	private Float preco;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 
 	public long getId() {
 		return id;
@@ -35,14 +39,6 @@ public class Product {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
 
 	public Float getPreco() {
 		return preco;
@@ -52,11 +48,21 @@ public class Product {
 		this.preco = preco;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public static Product convert(ProductDTO productDTO) {
 		Product product = new Product();
 		product.setNome(productDTO.getNome());
 		product.setPreco(productDTO.getPreco());
-		product.setSku(productDTO.getSku());
+		if (productDTO.getCategory() != null) {
+			product.setCategory(Category.convert(productDTO.getCategory()));
+		}
 		return product;
 	}
 
