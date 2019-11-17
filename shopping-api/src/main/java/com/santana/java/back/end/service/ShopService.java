@@ -1,5 +1,6 @@
 package com.santana.java.back.end.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,7 +23,16 @@ public class ShopService {
 		return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());		
 	}
 	
-	
+	public List<ShopDTO> getByUser(String userIdentifier) {
+		List<Shop> shops = shopRepository.findAllByUserIdentifier(userIdentifier);
+		return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());		
+	}
+		
+	public List<ShopDTO> getByDate(ShopDTO shopDTO) {
+		List<Shop> shops = shopRepository.findAllByDateGreaterThan(shopDTO.getDate());
+		return shops.stream().map(ShopDTO::convert).collect(Collectors.toList());		
+	}
+		
 	public ShopDTO findById(long ProductId) {
 		Optional<Shop> shop = shopRepository.findById(ProductId);
 		if (shop.isPresent()) {
@@ -32,9 +42,17 @@ public class ShopService {
 		//throw new ProductNotFoundException();
 	}
 	
-	public ShopDTO save(ShopDTO shopDTO) {
-				
-		Shop shop = shopRepository.save(Shop.convert(shopDTO));
+	public ShopDTO save(ShopDTO shopDTO) {			
+		
+		shopDTO.setTotal(shopDTO.getItems()
+				  .stream()
+				  .map(x -> x.getPrice())
+				  .reduce((float) 0, Float::sum));
+		
+		Shop shop = Shop.convert(shopDTO);
+		shop.setDate(new Date());
+		
+		shop = shopRepository.save(shop);
 		return ShopDTO.convert(shop);
 	}
 	

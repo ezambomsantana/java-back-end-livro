@@ -1,6 +1,8 @@
 package com.santana.java.back.end.model;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -18,15 +20,14 @@ public class Shop {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	private String userIdentifier;
-	
-	private float total;
+	private long id;	
+	private String userIdentifier;	
+	private float total;	
+	private Date date;
 	
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "shop_item", joinColumns = @JoinColumn(name = "shop_id"))
-	private List<Item> products;
+    @CollectionTable(name = "item", joinColumns = @JoinColumn(name = "shop_id"))
+	private List<Item> items;
 	
 	public long getId() {
 		return id;
@@ -52,18 +53,28 @@ public class Shop {
 		this.total = total;
 	}
 
-	public List<Item> getProducts() {
-		return products;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setProducts(List<Item> products) {
-		this.products = products;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	public static Shop convert(ShopDTO shopDTO) {
 		Shop shop = new Shop();
 		shop.setUserIdentifier(shopDTO.getUserIdentifier());
 		shop.setTotal(shopDTO.getTotal());
+		shop.setDate(shopDTO.getDate());
+		shop.setItems(shopDTO.getItems().stream().map(Item::convert).collect(Collectors.toList()));
 		return shop;
 	}
 

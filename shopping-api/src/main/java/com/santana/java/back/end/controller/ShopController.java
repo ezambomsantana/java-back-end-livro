@@ -24,6 +24,18 @@ public class ShopController {
 		List<ShopDTO> produtos = shopService.getAll();		
 		return produtos;
 	}
+	
+	@GetMapping("/shopsByUser/{userIdentifier}")
+	public List<ShopDTO> getShops(@PathVariable String userIdentifier) {		
+		List<ShopDTO> produtos = shopService.getByUser(userIdentifier);		
+		return produtos;
+	}
+	
+	@GetMapping("/shopsByDate")
+	public List<ShopDTO> getShops(@RequestBody ShopDTO shopDTO) {		
+		List<ShopDTO> produtos = shopService.getByDate(shopDTO);		
+		return produtos;
+	}
 		
 	@GetMapping("/shop/{id}")
 	public ShopDTO findById(@PathVariable Long id) {
