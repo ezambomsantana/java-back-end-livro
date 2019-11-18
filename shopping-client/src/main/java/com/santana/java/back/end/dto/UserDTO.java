@@ -1,7 +1,5 @@
 package com.santana.java.back.end.dto;
 
-import com.santana.java.back.end.model.User;
-
 public class UserDTO {
 
 	private String nome;
@@ -30,14 +28,6 @@ public class UserDTO {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}
-	
-	public static UserDTO convert(User user) {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setNome(user.getNome());
-		userDTO.setEndereco(user.getEndereco());
-		userDTO.setCpf(user.getCpf());
-		return userDTO;
 	}
 	
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.santan.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.UserDTO;
 import com.santana.java.back.end.exception.UserNotFoundException;
 import com.santana.java.back.end.model.User;
@@ -20,20 +21,20 @@ public class UserService {
 	
 	public List<UserDTO> getAll() {
 		List<User> usuarios = userRepository.findAll();
-		return usuarios.stream().map(UserDTO::convert).collect(Collectors.toList());		
+		return usuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
 	
 	public UserDTO findById(long userId) {
 		Optional<User> usuario = userRepository.findById(userId);
 		if (usuario.isPresent()) {
-			return UserDTO.convert(usuario.get());
+			return DTOConverter.convert(usuario.get());
 		}
 		throw new UserNotFoundException();
 	}
 	
 	public UserDTO save(UserDTO userDTO) {
 		User user = userRepository.save(User.convert(userDTO));
-		return UserDTO.convert(user);
+		return DTOConverter.convert(user);
 	}
 	
 	public UserDTO delete(long userId) throws UserNotFoundException {
@@ -47,7 +48,7 @@ public class UserService {
 	public UserDTO findByCpf(String cpf) {
 		User user = userRepository.findByCpf(cpf);
 		if (user != null) {
-			return UserDTO.convert(user);
+			return DTOConverter.convert(user);
 		}
 		throw new UserNotFoundException();
 	}

@@ -2,9 +2,6 @@ package com.santana.java.back.end.dto;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import com.santana.java.back.end.model.Shop;
 
 public class ShopDTO {
 
@@ -45,13 +42,4 @@ public class ShopDTO {
 		this.items = items;
 	}
 
-	public static ShopDTO convert(Shop shop) {
-		ShopDTO shopDTO = new ShopDTO();
-		shopDTO.setUserIdentifier(shop.getUserIdentifier());
-		shopDTO.setTotal(shop.getTotal());
-		shopDTO.setDate(shop.getDate());
-		shopDTO.setItems(shop.getItems().stream().map(ItemDTO::convert).collect(Collectors.toList()));
-		return shopDTO;
-	}
-	
 }

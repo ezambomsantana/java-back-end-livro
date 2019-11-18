@@ -19,19 +19,19 @@ public class ShopController {
 	@Autowired
 	private ShopService shopService;
 		
-	@GetMapping("/shops")
+	@GetMapping("/shop")
 	public List<ShopDTO> getShops() {		
 		List<ShopDTO> produtos = shopService.getAll();		
 		return produtos;
 	}
 	
-	@GetMapping("/shopsByUser/{userIdentifier}")
+	@GetMapping("/shopByUser/{userIdentifier}")
 	public List<ShopDTO> getShops(@PathVariable String userIdentifier) {		
 		List<ShopDTO> produtos = shopService.getByUser(userIdentifier);		
 		return produtos;
 	}
 	
-	@GetMapping("/shopsByDate")
+	@GetMapping("/shopByDate")
 	public List<ShopDTO> getShops(@RequestBody ShopDTO shopDTO) {		
 		List<ShopDTO> produtos = shopService.getByDate(shopDTO);		
 		return produtos;
