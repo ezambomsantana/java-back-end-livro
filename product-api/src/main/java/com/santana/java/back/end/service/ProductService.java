@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.santan.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.ProductDTO;
 import com.santana.java.back.end.exception.ProductNotFoundException;
 import com.santana.java.back.end.model.Product;
@@ -20,19 +21,19 @@ public class ProductService {
 		
 	public List<ProductDTO> getAll() {
 		List<Product> products = productRepository.findAll();
-		return products.stream().map(ProductDTO::convert).collect(Collectors.toList());		
+		return products.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
 	
 	public List<ProductDTO> getProductByCategoryId(Long categoryId) {
 		List<Product> products = productRepository.getProductByCategory(categoryId);
-		return products.stream().map(ProductDTO::convert).collect(Collectors.toList());		
+		return products.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
 	
 	
 	public ProductDTO findById(long ProductId) {
 		Optional<Product> usuario = productRepository.findById(ProductId);
 		if (usuario.isPresent()) {
-			return ProductDTO.convert(usuario.get());
+			return DTOConverter.convert(usuario.get());
 		}
 		throw new ProductNotFoundException();
 	}
@@ -40,7 +41,7 @@ public class ProductService {
 	public ProductDTO save(ProductDTO productDTO) {
 				
 		Product product = productRepository.save(Product.convert(productDTO));
-		return ProductDTO.convert(product);
+		return DTOConverter.convert(product);
 	}
 	
 	public ProductDTO delete(long ProductId) throws ProductNotFoundException {
