@@ -16,6 +16,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private String productIdentifier;
+	
 	private String nome;
 		
 	private Float preco;
@@ -30,6 +32,14 @@ public class Product {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getProductIdentifier() {
+		return productIdentifier;
+	}
+
+	public void setProductIdentifier(String productIdentifier) {
+		this.productIdentifier = productIdentifier;
 	}
 
 	public String getNome() {

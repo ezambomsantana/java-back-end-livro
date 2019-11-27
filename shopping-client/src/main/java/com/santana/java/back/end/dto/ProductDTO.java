@@ -2,9 +2,18 @@ package com.santana.java.back.end.dto;
 
 public class ProductDTO {
 
+	private String productIdentifier;
 	private String nome;
 	private Float preco;
 	private CategoryDTO category;
+
+	public String getProductIdentifier() {
+		return productIdentifier;
+	}
+
+	public void setProductIdentifier(String productIdentifier) {
+		this.productIdentifier = productIdentifier;
+	}
 
 	public String getNome() {
 		return nome;

@@ -2,9 +2,18 @@ package com.santana.java.back.end.dto;
 
 public class UserDTO {
 
+	private String userIdentifier;
 	private String nome;
 	private String cpf;
 	private String endereco;
+
+	public String getUserIdentifier() {
+		return userIdentifier;
+	}
+
+	public void setUserIdentifier(String userIdentifier) {
+		this.userIdentifier = userIdentifier;
+	}
 
 	public String getNome() {
 		return nome;

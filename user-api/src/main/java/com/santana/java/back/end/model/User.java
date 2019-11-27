@@ -14,6 +14,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private String userIdentifier;
+	
 	private String nome;
 	
 	private String cpf;
@@ -28,6 +30,14 @@ public class User {
 		this.id = id;
 	}
 
+	public String getUserIdentifier() {
+		return userIdentifier;
+	}
+
+	public void setUserIdentifier(String userIdentifier) {
+		this.userIdentifier = userIdentifier;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -57,6 +67,7 @@ public class User {
 		user.setNome(userDTO.getNome());
 		user.setEndereco(userDTO.getEndereco());
 		user.setCpf(userDTO.getCpf());
+		user.setUserIdentifier(userDTO.getUserIdentifier());
 		return user;
 	}
 
