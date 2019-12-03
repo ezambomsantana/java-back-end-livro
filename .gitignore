@@ -3,5 +3,9 @@ user-api/.settings/
 shopping-client/.classpath
 shopping-client/.project
 shopping-client/.settings/
+shopping-client/target/
 
 product-api/.settings/
+product-api/target/
+product-api/.classpath
+product-api/.project
