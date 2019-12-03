@@ -20,7 +20,7 @@ public class ProductControllerAdvice {
     public ErrorDTO handleUserNotFound(ProductNotFoundException userNotFoundException) {    	
     	ErrorDTO errorDTO = new ErrorDTO();
     	errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
-    	errorDTO.setMessage("Usuário não encontrado.");
+    	errorDTO.setMessage("Producto não encontrado.");
     	errorDTO.setTimestamp(new Date());
         return errorDTO;
     }

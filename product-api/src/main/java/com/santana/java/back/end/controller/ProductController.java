@@ -27,15 +27,15 @@ public class ProductController {
 		return produtos;
 	}
 	
-	@GetMapping("/product/{category-id}")
+	@GetMapping("/product/category/{categoryId}")
 	public List<ProductDTO> getProductByCategory(@PathVariable Long categoryId) {		
 		List<ProductDTO> produtos = productService.getProductByCategoryId(categoryId);		
 		return produtos;
 	}
-	
-	@GetMapping("/product/{id}")
-	ProductDTO findById(@PathVariable Long id) {
-	    return productService.findById(id);
+		
+	@GetMapping("/product/{productIdentifier}")
+	ProductDTO findById(@PathVariable String productIdentifier) {
+	    return productService.findByProductIdentifier(productIdentifier);
 	}
 	
 	@PostMapping("/newProduct")

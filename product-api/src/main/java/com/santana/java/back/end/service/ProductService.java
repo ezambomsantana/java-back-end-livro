@@ -28,18 +28,16 @@ public class ProductService {
 		List<Product> products = productRepository.getProductByCategory(categoryId);
 		return products.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
-	
-	
-	public ProductDTO findById(long ProductId) {
-		Optional<Product> usuario = productRepository.findById(ProductId);
-		if (usuario.isPresent()) {
-			return DTOConverter.convert(usuario.get());
+		
+	public ProductDTO findByProductIdentifier(String  productIdentifier) {
+		Product product = productRepository.findByProductIdentifier(productIdentifier);
+		if (product != null) {
+			return DTOConverter.convert(product);
 		}
 		throw new ProductNotFoundException();
 	}
 	
-	public ProductDTO save(ProductDTO productDTO) {
-				
+	public ProductDTO save(ProductDTO productDTO) {				
 		Product product = productRepository.save(Product.convert(productDTO));
 		return DTOConverter.convert(product);
 	}

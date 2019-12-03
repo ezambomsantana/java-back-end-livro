@@ -12,10 +12,12 @@ import com.santana.java.back.end.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	@Query(value = "select p.nome, p.preco "
+	@Query(value = "select p.nome, p.preco, p.productIdentifier "
 			+ "from product p "
 			+ "join category c on p.category.id = c.id "
 			+ "where c.id = :categoryId ")
 	public List<Product> getProductByCategory(@Param("categoryId") long categoryId);
+	
+	public Product findByProductIdentifier(String productIdentifier);
 	
 }

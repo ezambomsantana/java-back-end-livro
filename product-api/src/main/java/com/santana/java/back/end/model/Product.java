@@ -70,6 +70,7 @@ public class Product {
 		Product product = new Product();
 		product.setNome(productDTO.getNome());
 		product.setPreco(productDTO.getPreco());
+		product.setProductIdentifier(productDTO.getProductIdentifier());
 		if (productDTO.getCategory() != null) {
 			product.setCategory(Category.convert(productDTO.getCategory()));
 		}
