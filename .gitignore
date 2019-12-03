@@ -1,4 +1,7 @@
+user-api/.classpath
+user-api/.project
 user-api/.settings/
+user-api/target/
 
 shopping-client/.classpath
 shopping-client/.project
@@ -9,3 +12,9 @@ product-api/.settings/
 product-api/target/
 product-api/.classpath
 product-api/.project
+
+shopping-api/.classpath
+shopping-api/.project
+shopping-api/.settings/
+shopping-api/target/
+
