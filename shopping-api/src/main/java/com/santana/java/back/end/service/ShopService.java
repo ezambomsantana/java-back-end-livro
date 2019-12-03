@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.santan.java.back.end.converter.DTOConverter;
+import com.santana.java.back.end.dto.ItemDTO;
+import com.santana.java.back.end.dto.ProductDTO;
 import com.santana.java.back.end.dto.ShopDTO;
 import com.santana.java.back.end.model.Shop;
 import com.santana.java.back.end.repository.ShopRepository;
@@ -18,6 +20,12 @@ public class ShopService {
 	
 	@Autowired
 	private ShopRepository shopRepository;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
 		
 	public List<ShopDTO> getAll() {
 		List<Shop> shops = shopRepository.findAll();
@@ -43,7 +51,15 @@ public class ShopService {
 		//throw new ProductNotFoundException();
 	}
 	
-	public ShopDTO save(ShopDTO shopDTO) {			
+	public ShopDTO save(ShopDTO shopDTO) {		
+		
+		if (userService.getUserByCpf(shopDTO.getUserIdentifier()) == null) {
+			return null;
+		}
+		
+		if (!validateProducts(shopDTO.getItems())) {
+			return null;
+		}
 		
 		shopDTO.setTotal(shopDTO.getItems()
 				  .stream()
@@ -55,6 +71,17 @@ public class ShopService {
 		
 		shop = shopRepository.save(shop);
 		return DTOConverter.convert(shop);
+	}
+
+	private boolean validateProducts(List<ItemDTO> items) {
+		for (ItemDTO  item : items) {
+			ProductDTO productDTO = productService.getProductByIdentifier(item.getProductIdentifier());
+			if (productDTO == null) {
+				return false;
+			}
+			item.setPrice(productDTO.getPreco());
+		}
+		return true;		
 	}
 	
 }
