@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.santan.java.back.end.converter.DTOConverter;
+import com.santana.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.ItemDTO;
 import com.santana.java.back.end.dto.ProductDTO;
 import com.santana.java.back.end.dto.ShopDTO;
+import com.santana.java.back.end.exception.ProductNotFoundException;
+import com.santana.java.back.end.exception.UserNotFoundException;
 import com.santana.java.back.end.model.Shop;
 import com.santana.java.back.end.repository.ShopRepository;
 
@@ -47,18 +49,17 @@ public class ShopService {
 		if (shop.isPresent()) {
 			return DTOConverter.convert(shop.get());
 		}
-		return null;
-		//throw new ProductNotFoundException();
+		throw new ProductNotFoundException();
 	}
 	
 	public ShopDTO save(ShopDTO shopDTO) {		
 		
 		if (userService.getUserByCpf(shopDTO.getUserIdentifier()) == null) {
-			return null;
+			throw new UserNotFoundException();
 		}
 		
 		if (!validateProducts(shopDTO.getItems())) {
-			return null;
+			throw new ProductNotFoundException();
 		}
 		
 		shopDTO.setTotal(shopDTO.getItems()
