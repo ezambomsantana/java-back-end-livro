@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-api
+  labels:
+    app: shopping-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping-api
+  template:
+    metadata:
+      labels:
+        app: shopping-api
+    spec:
+      containers:
+        - name: shopping-api
+          image: loja/shopping-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8082
+          env:
+            - name: POSTGRES_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: database_url
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: database_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: database_password
+            - name: PRODUCT_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: shopping-api-configmap
+                  key: user_api_url
+            - name: USER_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: shopping-api-configmap
+                  key: product_api_url

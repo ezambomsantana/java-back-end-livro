@@ -1,0 +1,7 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: shopping-api-configmap
+data:
+  user_api_url: http://user-api:8080/
+  product_api_url: http://product-api:8081/
