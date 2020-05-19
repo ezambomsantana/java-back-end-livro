@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+spec:
+  rules:
+    - host: shopping.com
+      http:
+        paths:
+          - path: /user/
+            backend:
+              serviceName: user-api
+              servicePort: 8080
+          - path: /product/
+            backend:
+              serviceName: product-api
+              servicePort: 8081
+          - path: /shopping/
+            backend:
+              serviceName: shopping-api
+              servicePort: 8082
