@@ -1,0 +1,7 @@
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/App.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/model/Shop.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/repository/ShopRepository.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santan/java/back/end/converter/DTOConverter.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/controller/ShopController.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/model/Item.java
+/home/eduardo/dev/java-back-end-livro/shopping-api/src/main/java/com/santana/java/back/end/service/ShopService.java

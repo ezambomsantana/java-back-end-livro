@@ -10,6 +10,7 @@ public class DTOConverter {
 		userDTO.setNome(user.getNome());
 		userDTO.setEndereco(user.getEndereco());
 		userDTO.setCpf(user.getCpf());
+		userDTO.setKey(user.getKey());
 		return userDTO;
 	}
 		

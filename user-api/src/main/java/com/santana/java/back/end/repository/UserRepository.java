@@ -8,6 +8,6 @@ import com.santana.java.back.end.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-	User findByCpf(String cpf);
+	User findByCpfAndKey(String cpf, String key);
 
 }

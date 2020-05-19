@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE=target/dependency/doc-0.0.1-SNAPSHOT
+ARG JAR_FILE=target/user-api-0.0.1.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

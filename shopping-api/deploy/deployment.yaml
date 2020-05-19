@@ -40,9 +40,9 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: shopping-api-configmap
-                  key: user_api_url
+                  key: product_api_url
             - name: USER_API_URL
               valueFrom:
                 configMapKeyRef:
                   name: shopping-api-configmap
-                  key: product_api_url
+                  key: user_api_url

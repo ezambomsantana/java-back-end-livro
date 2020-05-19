@@ -5,6 +5,8 @@ public class UserDTO {
 	private String nome;
 	private String cpf;
 	private String endereco;
+	private String key;
+	private String email;
 
 	public String getNome() {
 		return nome;
@@ -28,6 +30,22 @@ public class UserDTO {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

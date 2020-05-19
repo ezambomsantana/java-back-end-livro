@@ -52,9 +52,9 @@ public class ShopService {
 		throw new ProductNotFoundException();
 	}
 	
-	public ShopDTO save(ShopDTO shopDTO) {		
+	public ShopDTO save(ShopDTO shopDTO, String key) {		
 		
-		if (userService.getUserByCpf(shopDTO.getUserIdentifier()) == null) {
+		if (userService.getUserByCpf(shopDTO.getUserIdentifier(), key) == null) {
 			throw new UserNotFoundException();
 		}
 		

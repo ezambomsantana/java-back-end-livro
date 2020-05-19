@@ -1,24 +1,35 @@
 package com.santana.java.back.end.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.santana.java.back.end.dto.UserDTO;
+import com.santana.java.back.end.exception.UserNotFoundException;
 
 @Service
 public class UserService {
+
+	@Value("${USER_API_URL:http://localhost:8080}")
+	private String userApiURL;
 	
-	public UserDTO getUserByCpf(String cpf) {
+	public UserDTO getUserByCpf(String cpf, String key) {		
+		RestTemplate restTemplate = new RestTemplate();		
 		
-		RestTemplate restTemplate = new RestTemplate();
-		
-		String url = "http://localhost:8080/user/" + cpf;
-		
-		ResponseEntity<UserDTO> response = restTemplate.getForEntity(url, UserDTO.class);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(userApiURL + "/user/cpf/" + cpf);
+	    builder.queryParam("key", key);
+	    
+	    System.out.println(builder.toUriString());
 				
-		return response.getBody();
+		ResponseEntity<UserDTO> response = restTemplate.getForEntity(builder.toUriString(), UserDTO.class);	
 		
+		if (response.getStatusCode().is4xxClientError()) {
+			throw new UserNotFoundException();
+		}
+		
+		return response.getBody();		
 	}
 
 }

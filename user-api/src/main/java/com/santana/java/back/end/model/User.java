@@ -19,6 +19,10 @@ public class User {
 	private String cpf;
 	
 	private String endereco;
+	
+	private String key;
+
+    private String email;
 
 	public long getId() {
 		return id;
@@ -52,11 +56,28 @@ public class User {
 		this.endereco = endereco;
 	}
 	
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public static User convert(UserDTO userDTO) {
 		User user = new User();
 		user.setNome(userDTO.getNome());
 		user.setEndereco(userDTO.getEndereco());
 		user.setCpf(userDTO.getCpf());
+		user.setKey(userDTO.getKey());
 		return user;
 	}
 

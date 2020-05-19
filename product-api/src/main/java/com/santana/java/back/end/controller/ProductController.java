@@ -38,7 +38,7 @@ public class ProductController {
 	    return productService.findByProductIdentifier(productIdentifier);
 	}
 	
-	@PostMapping("/newProduct")
+	@PostMapping("/product")
 	ProductDTO newProduct(@RequestBody ProductDTO userDTO) {		
 	    return productService.save(userDTO);
 	}
