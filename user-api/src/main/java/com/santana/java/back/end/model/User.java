@@ -1,6 +1,7 @@
 package com.santana.java.back.end.model;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,17 +15,14 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
 	private String nome;
-	
 	private String cpf;
-	
 	private String endereco;
-	
 	private String key;
-
     private String email;
-    
+    private String telefone;
+    private Date dataCadastro;
+        
 	public long getId() {
 		return id;
 	}
@@ -73,6 +71,22 @@ public class User {
 		this.email = email;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public static User convert(UserDTO userDTO) {
 		User user = new User();
 		user.setNome(userDTO.getNome());
@@ -80,6 +94,8 @@ public class User {
 		user.setCpf(userDTO.getCpf());
 		user.setKey(userDTO.getKey());
 		user.setEmail(userDTO.getEmail());
+		user.setTelefone(userDTO.getTelefone());
+		user.setDataCadastro(userDTO.getDataCadastro());
 		return user;
 	}
 
