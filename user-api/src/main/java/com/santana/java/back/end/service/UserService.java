@@ -57,8 +57,9 @@ public class UserService {
 		throw new UserNotFoundException();
 	}
 	
-	public List<UserDTO> buscaUsuarios(String nome, String email, String endereco) {
-		
+	public List<UserDTO> queryByName(String name) {
+		List<User> usuarios = userRepository.queryByNomeLike(name);
+		return usuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
 
 }

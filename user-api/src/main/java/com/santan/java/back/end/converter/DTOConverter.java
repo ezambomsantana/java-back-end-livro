@@ -11,6 +11,7 @@ public class DTOConverter {
 		userDTO.setEndereco(user.getEndereco());
 		userDTO.setCpf(user.getCpf());
 		userDTO.setKey(user.getKey());
+		userDTO.setEmail(user.getEmail());
 		return userDTO;
 	}
 		

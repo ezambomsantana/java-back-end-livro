@@ -1,5 +1,6 @@
 package com.santana.java.back.end.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-		
+
 	private String nome;
 	
 	private String cpf;
@@ -23,7 +24,7 @@ public class User {
 	private String key;
 
     private String email;
-
+    
 	public long getId() {
 		return id;
 	}
@@ -78,6 +79,7 @@ public class User {
 		user.setEndereco(userDTO.getEndereco());
 		user.setCpf(userDTO.getCpf());
 		user.setKey(userDTO.getKey());
+		user.setEmail(userDTO.getEmail());
 		return user;
 	}
 
