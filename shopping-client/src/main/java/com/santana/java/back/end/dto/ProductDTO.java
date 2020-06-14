@@ -1,10 +1,17 @@
 package com.santana.java.back.end.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ProductDTO {
 
+    @NotBlank
 	private String productIdentifier;
+    @NotBlank
 	private String nome;
-	private Float preco;
+    @NotNull
+    private Float preco;
+    @NotNull
 	private CategoryDTO category;
 
 	public String getProductIdentifier() {

@@ -3,11 +3,18 @@ package com.santana.java.back.end.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ShopDTO {
 
+	@NotBlank
 	private String userIdentifier;
+	@NotNull
 	private Float total;
+	@NotNull
 	private Date date;
+	@NotNull
 	private List<ItemDTO> items;
 
 	public String getUserIdentifier() {

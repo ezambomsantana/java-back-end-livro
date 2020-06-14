@@ -2,6 +2,7 @@ package com.santana.java.back.end.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +40,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product")
-	ProductDTO newProduct(@RequestBody ProductDTO userDTO) {		
+	ProductDTO newProduct(@Valid @RequestBody ProductDTO userDTO) {		
 	    return productService.save(userDTO);
 	}
 		
