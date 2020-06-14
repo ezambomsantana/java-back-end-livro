@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.santan.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.ProductDTO;
+import com.santana.java.back.end.exception.CategoryNotFoundException;
 import com.santana.java.back.end.exception.ProductNotFoundException;
+import com.santana.java.back.end.model.Category;
 import com.santana.java.back.end.model.Product;
+import com.santana.java.back.end.repository.CategoryRepository;
 import com.santana.java.back.end.repository.ProductRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 		
 	public List<ProductDTO> getAll() {
 		List<Product> products = productRepository.findAll();
@@ -37,7 +43,11 @@ public class ProductService {
 		throw new ProductNotFoundException();
 	}
 	
-	public ProductDTO save(ProductDTO productDTO) {				
+	public ProductDTO save(ProductDTO productDTO) {
+		Boolean existsCategory = categoryRepository.existsById(productDTO.getCategory().getId());
+		if (!existsCategory) {
+			throw new CategoryNotFoundException();
+		}				
 		Product product = productRepository.save(Product.convert(productDTO));
 		return DTOConverter.convert(product);
 	}

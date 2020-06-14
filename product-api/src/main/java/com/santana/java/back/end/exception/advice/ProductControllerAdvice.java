@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.santana.java.back.end.dto.ErrorDTO;
+import com.santana.java.back.end.exception.CategoryNotFoundException;
 import com.santana.java.back.end.exception.ProductNotFoundException;
 
 @ControllerAdvice(basePackages = "com.santana.java.back.end.controller")
@@ -20,7 +21,18 @@ public class ProductControllerAdvice {
     public ErrorDTO handleUserNotFound(ProductNotFoundException userNotFoundException) {    	
     	ErrorDTO errorDTO = new ErrorDTO();
     	errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
-    	errorDTO.setMessage("Producto não encontrado.");
+    	errorDTO.setMessage("Produto não encontrado.");
+    	errorDTO.setTimestamp(new Date());
+        return errorDTO;
+    }
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ErrorDTO handleCategoryNotFound(CategoryNotFoundException categoryNotFoundException) {    	
+    	ErrorDTO errorDTO = new ErrorDTO();
+    	errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
+    	errorDTO.setMessage("Categoria não encontrada.");
     	errorDTO.setTimestamp(new Date());
         return errorDTO;
     }
