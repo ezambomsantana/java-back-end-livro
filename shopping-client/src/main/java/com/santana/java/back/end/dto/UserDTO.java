@@ -1,5 +1,7 @@
 package com.santana.java.back.end.dto;
 
+import java.util.Date;
+
 public class UserDTO {
 
 	private String nome;
@@ -7,6 +9,8 @@ public class UserDTO {
 	private String endereco;
 	private String key;
 	private String email;
+    private String telefone;
+    private Date dataCadastro;
 
 	public String getNome() {
 		return nome;
@@ -46,6 +50,22 @@ public class UserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 	
 }
