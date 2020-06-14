@@ -1,5 +1,6 @@
 package com.santana.java.back.end.repository;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.santana.java.back.end.dto.ShopReportDTO;
 import com.santana.java.back.end.model.Shop;
 
 public class ReportRepositoryImpl implements ReportRepository {
@@ -15,19 +17,21 @@ public class ReportRepositoryImpl implements ReportRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Shop> getShopByFilters(Date dataInicio, Date dataFim, Integer valorMinimo) {
+	public List<Shop> getShopByFilters(Date dataInicio, Date dataFim, Float valorMinimo) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("select * from shop sp where sp.date >= :dataInicio ");
+		sb.append("select s ");
+		sb.append("from shop s ");
+		sb.append("where s.date >= :dataInicio ");
 
 		if (dataFim != null) {
-			sb.append("and sp.date <= :dataFim ");			
+			sb.append("and s.date <= :dataFim ");			
 		}
 
 		if (valorMinimo != null) {
-			sb.append("and sp.total <= :valorMinimo ");			
+			sb.append("and s.total <= :valorMinimo ");			
 		}
 		
-		Query query = entityManager.createNativeQuery(sb.toString());
+		Query query = entityManager.createQuery(sb.toString());
 		query.setParameter("dataInicio", dataInicio);
 
 		if (dataFim != null) {
@@ -37,22 +41,27 @@ public class ReportRepositoryImpl implements ReportRepository {
 		if (valorMinimo != null) {
 			query.setParameter("valorMinimo", valorMinimo);	
 		}
-		return query.getResultList();
-		
+		return query.getResultList();		
 	}
 
 	@Override
-	public List<Shop> getReportByDate(Date dataInicio, Date dataFim) {
+	public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("select count(*), sum(tota), avg(total from shop sp where ");
-		sb.append("sp.date >= :dataInicio ");
+		sb.append("select count(sp.id), sum(sp.total), avg(sp.total) ");
+		sb.append("from shopping.shop sp ");
+		sb.append("where  sp.date >= :dataInicio ");
 		sb.append("and sp.date <= :dataFim ");		
 		
 		Query query = entityManager.createNativeQuery(sb.toString());
 		query.setParameter("dataInicio", dataInicio);
 		query.setParameter("dataFim", dataFim);			
 
-		return query.getResultList();
+		Object[] result = (Object[]) query.getSingleResult();
+		ShopReportDTO shopReportDTO = new ShopReportDTO();
+		shopReportDTO.setCount(((BigInteger) result[0]).intValue());
+		shopReportDTO.setTotal((Double) result[1]);
+		shopReportDTO.setMean((Double) result[2]);
+		return shopReportDTO;		
 	}
 
 }

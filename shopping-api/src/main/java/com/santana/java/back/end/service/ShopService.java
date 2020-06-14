@@ -12,6 +12,8 @@ import com.santana.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.ItemDTO;
 import com.santana.java.back.end.dto.ProductDTO;
 import com.santana.java.back.end.dto.ShopDTO;
+import com.santana.java.back.end.dto.ShopReportDTO;
+import com.santana.java.back.end.dto.UserDTO;
 import com.santana.java.back.end.exception.ProductNotFoundException;
 import com.santana.java.back.end.exception.UserNotFoundException;
 import com.santana.java.back.end.model.Shop;
@@ -53,14 +55,8 @@ public class ShopService {
 	}
 	
 	public ShopDTO save(ShopDTO shopDTO, String key) {		
-		
-		if (userService.getUserByCpf(shopDTO.getUserIdentifier(), key) == null) {
-			throw new UserNotFoundException();
-		}
-		
-		if (!validateProducts(shopDTO.getItems())) {
-			throw new ProductNotFoundException();
-		}
+		UserDTO userDTO = userService.getUserByCpf(shopDTO.getUserIdentifier(), key);
+		validateProducts(shopDTO.getItems());
 		
 		shopDTO.setTotal(shopDTO.getItems()
 				  .stream()
@@ -83,6 +79,16 @@ public class ShopService {
 			item.setPrice(productDTO.getPreco());
 		}
 		return true;		
+	}
+	
+	public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
+		List<Shop> shops = shopRepository.getShopByFilters(dataInicio, dataFim, valorMinimo);
+		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());		
+		
+	}
+	
+	public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
+		return shopRepository.getReportByDate(dataInicio, dataFim);
 	}
 	
 }

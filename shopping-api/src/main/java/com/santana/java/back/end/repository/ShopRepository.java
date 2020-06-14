@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.santana.java.back.end.model.Shop;
 
 @Repository
-public interface ShopRepository extends JpaRepository<Shop, Long> {
+public interface ShopRepository extends JpaRepository<Shop, Long>, ReportRepository {
 	
 	public List<Shop> findAllByUserIdentifier(String userIdentifier);
 
