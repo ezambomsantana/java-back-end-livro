@@ -2,20 +2,25 @@ user-api/.classpath
 user-api/.project
 user-api/.settings/
 user-api/target/
+user-api/.idea
 
 shopping-client/.classpath
 shopping-client/.project
 shopping-client/.settings/
 shopping-client/target/
+shopping-client/.idea
 
 product-api/.settings/
 product-api/target/
 product-api/.classpath
 product-api/.project
+product-api/.idea
 
 shopping-api/.classpath
 shopping-api/.project
 shopping-api/.settings/
 shopping-api/target/
+shopping-api/.idea
+
 
 /.metadata/
