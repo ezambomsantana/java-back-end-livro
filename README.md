@@ -21,9 +21,13 @@ As aplicações estão configuradas para se conectar ao banco de dados 'dev', po
 
 Todos os projetos acessam o mesmo banco de dados, e criam schemas diferentes.
 
+## Postman
+
+o arquivo `livro-back-end-java.postman_collection.json` é uma collection do Postman que possui as chamadas para os serviços da aplicação. A collection está configurada para chamar os serviços já no Kubernetes. Para chamar na execução local, basta trocar o shopping.com para localhost:808x.
+
 
 ## Execução
 
-A maneira mais simples de executar a aplicação é utilizando o docker-compose, para isto, basta executar o comando `docker-compose up`.
+A maneira mais simples de executar a aplicação é utilizando o docker-compose, para isto, basta executar o comando `docker-compose up` depois que a imagem docker dos microserviços forem criados.
 
 Eu desenvolvi a aplicação utilizando o Java 8, talvez exista algum problema de portabilidade para versões mais recentes do Java.

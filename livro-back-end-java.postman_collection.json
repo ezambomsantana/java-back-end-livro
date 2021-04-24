@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "e65fd350-3be0-4e68-b0bb-1b61904847dc",
+		"name": "livro-back-end-java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Shopping",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "key",
+						"type": "text",
+						"value": "f0583b27-b1a5-4326-8d47-a40a7ada6cea",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userIdentifier\": \"123\",\n    \"items\": [\n        {\n            \"productIdentifier\": \"p3\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/shopping/",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"shopping",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shopping",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/shopping/",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"shopping",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shopping report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "shopping.com/shopping/report?dataInicio=01/01/2010&dataFim=01/01/2021",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"shopping",
+						"report"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "01/01/2010"
+						},
+						{
+							"key": "dataFim",
+							"value": "01/01/2021"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "shopping.com/shopping/report?dataInicio=01/01/2010&dataFim=01/01/2021",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"shopping",
+						"report"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "01/01/2010"
+						},
+						{
+							"key": "dataFim",
+							"value": "01/01/2021"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/user/cpf/123",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"user",
+						"cpf",
+						"123"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "f0583b27-b1a5-4326-8d47-a40a7ada6cea",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\":\"marcelo\",\n\t\"cpf\":\"123\",\n\t\"endereco\": \"Rua abc\",\n\t\"email\": \"marcelo@email.com\"\n}"
+				},
+				"url": {
+					"raw": "http://shopping.com/user/",
+					"protocol": "http",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://shopping.com/user/search",
+					"protocol": "http",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"user",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "key",
+						"value": "fasfasdas",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\":\"TV 2\",\n\t\"productIdentifier\": \"p3\",\n\t\"preco\": 100,\n\t\"category\": {\n\t\t\"id\": 1\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "shopping.com/product/",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "shopping.com/product",
+					"host": [
+						"shopping",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
