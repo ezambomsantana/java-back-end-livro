@@ -28,7 +28,7 @@ o arquivo `livro-back-end-java.postman_collection.json` é uma collection do Pos
 
 A maneira mais simples de executar a aplicação é utilizando o docker-compose, para isto, basta executar o comando `docker-compose up` depois que a imagem docker dos microserviços forem criadas.
 
-## Versções
+## Versões
 
 Eu utilizei a versão 2.3.0.RELEASE do Spring Boot para desenvolver a aplicação, pois ela era a versão mais recente quando escrevi o livro, quando for atualizar o livro vou atualizar a aplicação para a versão mais recente do Spring Boot.
 
