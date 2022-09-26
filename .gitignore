@@ -22,6 +22,11 @@ shopping-api/.settings/
 shopping-api/target/
 shopping-api/.idea
 
+simple-user-api/.classpath
+simple-user-api/.project
+simple-user-api/.settings/
+simple-user-api/target/
+simple-user-api/.idea
 
 /.metadata/
 
