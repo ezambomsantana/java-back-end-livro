@@ -1,52 +1,56 @@
 package com.santana.java.back.end.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.santan.java.back.end.converter.DTOConverter;
+import com.santana.java.back.end.converter.DTOConverter;
 import com.santana.java.back.end.dto.UserDTO;
 import com.santana.java.back.end.exception.UserNotFoundException;
 import com.santana.java.back.end.model.User;
 import com.santana.java.back.end.repository.UserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-	
-	@Autowired
-	private UserRepository userRepository;
+
+	private final UserRepository userRepository;
 	
 	public List<UserDTO> getAll() {
-		List<User> usuarios = userRepository.findAll();
-		return usuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());		
+		List<User> users = userRepository.findAll();
+		return users
+				.stream()
+				.map(DTOConverter::convert)
+				.collect(Collectors.toList());
+	}
+
+	public Page<UserDTO> getAllPage(Pageable page) {
+		Page<User> users = userRepository.findAll(page);
+		return users
+				.map(DTOConverter::convert);
 	}
 	
 	public UserDTO findById(long userId) {
-		Optional<User> usuario = userRepository.findById(userId);
-		if (usuario.isPresent()) {
-			return DTOConverter.convert(usuario.get());
-		}
-		throw new UserNotFoundException();
+		User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		return DTOConverter.convert(user);
 	}
 	
 	public UserDTO save(UserDTO userDTO) {
-		
 		userDTO.setKey(UUID.randomUUID().toString());
-		
+		userDTO.setDataCadastro(LocalDateTime.now());
 		User user = userRepository.save(User.convert(userDTO));
 		return DTOConverter.convert(user);
 	}
 	
-	public UserDTO delete(long userId) throws UserNotFoundException {
-		Optional<User> user = userRepository.findById(userId);
-		if (user.isPresent()) {
-			userRepository.delete(user.get());
-		}
-		throw new UserNotFoundException();
+	public void delete(long userId) throws UserNotFoundException {
+		User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
+		userRepository.delete(user);
 	}
 	
 	public UserDTO findByCpf(String cpf, String key) {
@@ -62,4 +66,19 @@ public class UserService {
 		return usuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 	}
 
+	public UserDTO editUser(Long userId, UserDTO userDTO) {
+		User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException());
+		if (userDTO.getEmail() != null && !user.getEmail().equals(userDTO.getEmail())) {
+			user.setEmail(userDTO.getEmail());
+		}
+		if (userDTO.getTelefone() != null && !user.getTelefone().equals(userDTO.getTelefone())) {
+			user.setTelefone(userDTO.getTelefone());
+		}
+		if (userDTO.getEndereco() != null && !user.getEndereco().equals(userDTO.getEndereco())) {
+			user.setEndereco(userDTO.getEndereco());
+		}
+
+		user = userRepository.save(user);
+		return DTOConverter.convert(user);
+	}
 }
