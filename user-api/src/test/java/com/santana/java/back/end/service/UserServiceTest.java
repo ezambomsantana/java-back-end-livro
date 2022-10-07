@@ -28,12 +28,22 @@ public class UserServiceTest {
     public void testListAllUsers() {
 
         List<User> users = new ArrayList<>();
+        users.add(getUser(1, "User Name", "123"));
+        users.add(getUser(2, "User Name 2", "321"));
 
         Mockito.when(userRepository.findAll()).thenReturn(users);
 
         List<UserDTO> usersReturn = userService.getAll();
-        Assertions.assertEquals(0, usersReturn.size());
+        Assertions.assertEquals(2, usersReturn.size());
 
+    }
+
+    private User getUser(Integer id, String nome, String cpf) {
+        User user = new User();
+        user.setId(id);
+        user.setNome(nome);
+        user.setCpf(cpf);
+        return user;
     }
 
 

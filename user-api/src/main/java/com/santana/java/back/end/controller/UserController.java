@@ -40,7 +40,7 @@ public class UserController {
 	    return userService.save(userDTO);
 	}
 
-	@PatchMapping("/{id}")
+	@PostMapping("/{id}")
 	public UserDTO editUser(@PathVariable Long id,
 							@RequestBody UserDTO userDTO) {
 		return userService.editUser(id, userDTO);
