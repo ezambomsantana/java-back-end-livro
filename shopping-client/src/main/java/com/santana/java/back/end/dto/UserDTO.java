@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-
 	private String nome;
 	private String cpf;
 	private String endereco;
@@ -20,5 +19,4 @@ public class UserDTO {
 	private String email;
     private String telefone;
     private LocalDateTime dataCadastro;
-	
 }

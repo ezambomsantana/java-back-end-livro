@@ -1,8 +1,17 @@
 package com.santana.java.back.end.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
 
     @NotBlank
@@ -13,37 +22,5 @@ public class ProductDTO {
     private Float preco;
     @NotNull
 	private CategoryDTO category;
-
-	public String getProductIdentifier() {
-		return productIdentifier;
-	}
-
-	public void setProductIdentifier(String productIdentifier) {
-		this.productIdentifier = productIdentifier;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public Float getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Float preco) {
-		this.preco = preco;
-	}
-
-	public CategoryDTO getCategory() {
-		return category;
-	}
-
-	public void setCategory(CategoryDTO category) {
-		this.category = category;
-	}
 	
 }
