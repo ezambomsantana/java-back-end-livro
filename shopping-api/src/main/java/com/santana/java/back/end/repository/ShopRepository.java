@@ -1,5 +1,6 @@
 package com.santana.java.back.end.repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +12,10 @@ import com.santana.java.back.end.model.Shop;
 @Repository
 public interface ShopRepository extends JpaRepository<Shop, Long>, ReportRepository {
 	
-	public List<Shop> findAllByUserIdentifier(String userIdentifier);
+    List<Shop> findAllByUserIdentifier(String userIdentifier);
 
-    public List<Shop> findAllByTotalGreaterThan(Float total);
+    List<Shop> findAllByTotalGreaterThan(Float total);
         
-    List<Shop> findAllByDateGreaterThan(Date date);
+    List<Shop> findAllByDateGreaterThan(LocalDateTime date);
 		
 }

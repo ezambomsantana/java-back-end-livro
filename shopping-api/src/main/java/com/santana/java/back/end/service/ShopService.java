@@ -1,11 +1,11 @@
 package com.santana.java.back.end.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.santana.java.back.end.converter.DTOConverter;
@@ -15,21 +15,16 @@ import com.santana.java.back.end.dto.ShopDTO;
 import com.santana.java.back.end.dto.ShopReportDTO;
 import com.santana.java.back.end.dto.UserDTO;
 import com.santana.java.back.end.exception.ProductNotFoundException;
-import com.santana.java.back.end.exception.UserNotFoundException;
 import com.santana.java.back.end.model.Shop;
 import com.santana.java.back.end.repository.ShopRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ShopService {
-	
-	@Autowired
-	private ShopRepository shopRepository;
-	
-	@Autowired
-	private ProductService productService;
-	
-	@Autowired
-	private UserService userService;
+
+	private final ShopRepository shopRepository;
+	private final ProductService productService;
+	private final UserService userService;
 		
 	public List<ShopDTO> getAll() {
 		List<Shop> shops = shopRepository.findAll();
@@ -64,7 +59,7 @@ public class ShopService {
 				  .reduce((float) 0, Float::sum));
 		
 		Shop shop = Shop.convert(shopDTO);
-		shop.setDate(new Date());
+		shop.setDate(LocalDateTime.now());
 		
 		shop = shopRepository.save(shop);
 		return DTOConverter.convert(shop);
@@ -81,13 +76,13 @@ public class ShopService {
 		return true;		
 	}
 	
-	public List<ShopDTO> getShopsByFilter(Date dataInicio, Date dataFim, Float valorMinimo) {
+	public List<ShopDTO> getShopsByFilter(LocalDateTime dataInicio, LocalDateTime dataFim, Float valorMinimo) {
 		List<Shop> shops = shopRepository.getShopByFilters(dataInicio, dataFim, valorMinimo);
 		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 		
 	}
 	
-	public ShopReportDTO getReportByDate(Date dataInicio, Date dataFim) {
+	public ShopReportDTO getReportByDate(LocalDateTime dataInicio, LocalDateTime dataFim) {
 		return shopRepository.getReportByDate(dataInicio, dataFim);
 	}
 	

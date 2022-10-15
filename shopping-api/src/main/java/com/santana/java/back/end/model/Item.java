@@ -3,7 +3,15 @@ package com.santana.java.back.end.model;
 import javax.persistence.Embeddable;
 
 import com.santana.java.back.end.dto.ItemDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class Item {
 	

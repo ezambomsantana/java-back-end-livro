@@ -1,45 +1,38 @@
 package com.santana.java.back.end.controller;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.santana.java.back.end.dto.ShopDTO;
 import com.santana.java.back.end.dto.ShopReportDTO;
 import com.santana.java.back.end.service.ShopService;
 
 @RestController
-public class ShopController {
-	
-	@Autowired
-	private ShopService shopService;
+@RequiredArgsConstructor
+public class 	ShopController {
+
+	private final ShopService shopService;
 		
-	@GetMapping("/shopping/")
+	@GetMapping("/shopping")
 	public List<ShopDTO> getShops() {		
-		List<ShopDTO> produtos = shopService.getAll();		
-		return produtos;
+		return shopService.getAll();
 	}
 	
 	@GetMapping("/shopping/shopByUser/{userIdentifier}")
 	public List<ShopDTO> getShops(@PathVariable String userIdentifier) {		
-		List<ShopDTO> produtos = shopService.getByUser(userIdentifier);		
-		return produtos;
+		return shopService.getByUser(userIdentifier);
 	}
 	
 	@GetMapping("/shopping/shopByDate")
 	public List<ShopDTO> getShops(@RequestBody ShopDTO shopDTO) {		
-		List<ShopDTO> produtos = shopService.getByDate(shopDTO);		
-		return produtos;
+		return shopService.getByDate(shopDTO);
 	}
 		
 	@GetMapping("/shopping/{id}")
@@ -48,6 +41,7 @@ public class ShopController {
 	}
 	
 	@PostMapping("/shopping/")
+	@ResponseStatus(HttpStatus.CREATED)
 	public ShopDTO newShop(
 			@RequestHeader(name = "key", required=true) String key,
 			@RequestBody ShopDTO shopDTO) {		
@@ -57,9 +51,9 @@ public class ShopController {
 	@GetMapping("/shopping/search")
 	public List<ShopDTO> getShopsByFilter(
 			@RequestParam(name = "dataInicio", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataInicio,
 			@RequestParam(name = "dataFim", required=false) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataFim,
 			@RequestParam(name = "valorMinimo", required=false) Float valorMinimo) {		
 	    return shopService.getShopsByFilter(dataInicio, dataFim, valorMinimo);
 	}
@@ -67,9 +61,9 @@ public class ShopController {
 	@GetMapping("/shopping/report")
 	public ShopReportDTO getReportByDate(
 			@RequestParam(name = "dataInicio", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") Date dataInicio,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataInicio,
 			@RequestParam(name = "dataFim", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") Date dataFim) {		
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataFim) {
 	    return shopService.getReportByDate(dataInicio, dataFim);
 	}
 			
