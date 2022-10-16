@@ -1,5 +1,6 @@
 package com.santana.java.back.end.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -76,13 +77,13 @@ public class ShopService {
 		return true;		
 	}
 	
-	public List<ShopDTO> getShopsByFilter(LocalDateTime dataInicio, LocalDateTime dataFim, Float valorMinimo) {
+	public List<ShopDTO> getShopsByFilter(LocalDate dataInicio, LocalDate dataFim, Float valorMinimo) {
 		List<Shop> shops = shopRepository.getShopByFilters(dataInicio, dataFim, valorMinimo);
 		return shops.stream().map(DTOConverter::convert).collect(Collectors.toList());		
 		
 	}
 	
-	public ShopReportDTO getReportByDate(LocalDateTime dataInicio, LocalDateTime dataFim) {
+	public ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim) {
 		return shopRepository.getReportByDate(dataInicio, dataFim);
 	}
 	

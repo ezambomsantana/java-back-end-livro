@@ -1,5 +1,6 @@
 package com.santana.java.back.end.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -51,9 +52,9 @@ public class 	ShopController {
 	@GetMapping("/shopping/search")
 	public List<ShopDTO> getShopsByFilter(
 			@RequestParam(name = "dataInicio", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataInicio,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
 			@RequestParam(name = "dataFim", required=false) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataFim,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim,
 			@RequestParam(name = "valorMinimo", required=false) Float valorMinimo) {		
 	    return shopService.getShopsByFilter(dataInicio, dataFim, valorMinimo);
 	}
@@ -61,9 +62,9 @@ public class 	ShopController {
 	@GetMapping("/shopping/report")
 	public ShopReportDTO getReportByDate(
 			@RequestParam(name = "dataInicio", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataInicio,
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
 			@RequestParam(name = "dataFim", required=true) 
-				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDateTime dataFim) {
+				@DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim) {
 	    return shopService.getReportByDate(dataInicio, dataFim);
 	}
 			

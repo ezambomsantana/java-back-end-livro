@@ -1,5 +1,6 @@
 package com.santana.java.back.end.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,8 +9,8 @@ import com.santana.java.back.end.model.Shop;
 
 public interface ReportRepository  {
 	
-	List<Shop> getShopByFilters(LocalDateTime dataInicio, LocalDateTime dataFim, Float valorMinimo);
+	List<Shop> getShopByFilters(LocalDate dataInicio, LocalDate dataFim, Float valorMinimo);
 	
-	ShopReportDTO getReportByDate(LocalDateTime dataInicio, LocalDateTime dataFim);
+	ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim);
 
 }

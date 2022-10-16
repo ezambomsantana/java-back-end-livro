@@ -1,7 +1,7 @@
 package com.santana.java.back.end.repository;
 
 import java.math.BigInteger;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Shop> getShopByFilters(LocalDateTime dataInicio, LocalDateTime dataFim, Float valorMinimo) {
+	public List<Shop> getShopByFilters(LocalDate dataInicio, LocalDate dataFim, Float valorMinimo) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("select s ");
 		sb.append("from shop s ");
@@ -45,7 +45,7 @@ public class ReportRepositoryImpl implements ReportRepository {
 	}
 
 	@Override
-	public ShopReportDTO getReportByDate(LocalDateTime dataInicio, LocalDateTime dataFim) {
+	public ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("select count(sp.id), sum(sp.total), avg(sp.total) ");
 		sb.append("from shopping.shop sp ");
