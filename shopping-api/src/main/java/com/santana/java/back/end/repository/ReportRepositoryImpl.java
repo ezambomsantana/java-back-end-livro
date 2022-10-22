@@ -32,10 +32,12 @@ public class ReportRepositoryImpl implements ReportRepository {
 		}
 		
 		Query query = entityManager.createQuery(sb.toString());
-		query.setParameter("dataInicio", dataInicio);
+		query.setParameter("dataInicio",
+				dataInicio.atTime(0, 0));
 
 		if (dataFim != null) {
-			query.setParameter("dataFim", dataFim);			
+			query.setParameter("dataFim",
+					dataFim.atTime(23, 59));
 		}
 
 		if (valorMinimo != null) {
@@ -44,24 +46,26 @@ public class ReportRepositoryImpl implements ReportRepository {
 		return query.getResultList();		
 	}
 
-	@Override
-	public ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("select count(sp.id), sum(sp.total), avg(sp.total) ");
-		sb.append("from shopping.shop sp ");
-		sb.append("where  sp.date >= :dataInicio ");
-		sb.append("and sp.date <= :dataFim ");		
-		
-		Query query = entityManager.createNativeQuery(sb.toString());
-		query.setParameter("dataInicio", dataInicio);
-		query.setParameter("dataFim", dataFim);			
+		@Override
+		public ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("select count(sp.id), sum(sp.total), avg(sp.total) ");
+			sb.append("from shopping.shop sp ");
+			sb.append("where  sp.date >= :dataInicio ");
+			sb.append("and sp.date <= :dataFim ");
 
-		Object[] result = (Object[]) query.getSingleResult();
-		ShopReportDTO shopReportDTO = new ShopReportDTO();
-		shopReportDTO.setCount(((BigInteger) result[0]).intValue());
-		shopReportDTO.setTotal((Double) result[1]);
-		shopReportDTO.setMean((Double) result[2]);
-		return shopReportDTO;		
-	}
+			Query query = entityManager.createNativeQuery(sb.toString());
+			query.setParameter("dataInicio", dataInicio
+					.atTime(0, 0));
+			query.setParameter("dataFim", dataFim
+					.atTime(23, 59));
+
+			Object[] result = (Object[]) query.getSingleResult();
+			ShopReportDTO shopReportDTO = new ShopReportDTO();
+			shopReportDTO.setCount(((BigInteger) result[0]).intValue());
+			shopReportDTO.setTotal((Double) result[1]);
+			shopReportDTO.setMean((Double) result[2]);
+			return shopReportDTO;
+		}
 
 }
