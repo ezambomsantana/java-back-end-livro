@@ -1,6 +1,6 @@
 package com.santana.java.back.end.exception.advice;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class ProductControllerAdvice {
     	ErrorDTO errorDTO = new ErrorDTO();
     	errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
     	errorDTO.setMessage("Produto não encontrado.");
-    	errorDTO.setTimestamp(new Date());
+    	errorDTO.setTimestamp(LocalDateTime.now());
         return errorDTO;
     }
 	
@@ -37,7 +37,7 @@ public class ProductControllerAdvice {
     	ErrorDTO errorDTO = new ErrorDTO();
     	errorDTO.setStatus(HttpStatus.NOT_FOUND.value());
     	errorDTO.setMessage("Categoria não encontrada.");
-    	errorDTO.setTimestamp(new Date());
+    	errorDTO.setTimestamp(LocalDateTime.now());
         return errorDTO;
     }
 
@@ -55,7 +55,7 @@ public class ProductControllerAdvice {
         	sb.append(fieldError.getField());
         }        
     	errorDTO.setMessage(sb.toString());
-    	errorDTO.setTimestamp(new Date());
+    	errorDTO.setTimestamp(LocalDateTime.now());
 	    return errorDTO;
 	}
 }

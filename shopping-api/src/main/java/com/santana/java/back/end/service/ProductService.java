@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class ProductService {
 	
-	@Value("${PRODUCT_API_URL:http://localhost:8081}")
+	@Value("${PRODUCT_API_URL:http://localhost:54880}")
 	private String productApiURL;
 	
 	public ProductDTO getProductByIdentifier(String productIdentifier) {
@@ -28,6 +28,7 @@ public class ProductService {
 
 			return product.block();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new ProductNotFoundException();
 		}
 
