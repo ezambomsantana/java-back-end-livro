@@ -40,7 +40,18 @@ services:
       POSTGRES_URL: jdbc:postgresql://postgres:5432/dev
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      PRODUCT_API_URL: localhost:8081
-      USER_API_URL: localhost:8080
+      PRODUCT_API_URL: http://product:8081
+      USER_API_URL: http://user:8080
+    depends_on:
+      - postgres
+
+  gateway:
+    image: loja/gateway
+    ports:
+      - "8084:8084"
+    environment:
+      PRODUCT_API_URL: http://product:8081
+      USER_API_URL: http://user:8080
+      SHOPPING_API_URL: http://shopping:8082
     depends_on:
       - postgres
