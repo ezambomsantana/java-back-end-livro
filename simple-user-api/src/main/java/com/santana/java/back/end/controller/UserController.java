@@ -4,8 +4,8 @@ import com.santana.java.back.end.dto.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import javax.validation.Valid;
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

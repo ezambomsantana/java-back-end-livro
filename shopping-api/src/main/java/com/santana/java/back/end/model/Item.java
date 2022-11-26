@@ -1,6 +1,6 @@
 package com.santana.java.back.end.model;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 import com.santana.java.back.end.dto.ItemDTO;
 import lombok.AllArgsConstructor;

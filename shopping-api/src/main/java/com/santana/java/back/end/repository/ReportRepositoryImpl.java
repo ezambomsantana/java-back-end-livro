@@ -4,9 +4,9 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 import com.santana.java.back.end.dto.ShopReportDTO;
 import com.santana.java.back.end.model.Shop;

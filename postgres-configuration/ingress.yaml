@@ -1,21 +1,30 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gateway-ingress
 spec:
   rules:
-    - host: shopping.com
+    - host: localhost
       http:
         paths:
           - path: /user/
+            pathType: Prefix
             backend:
-              serviceName: user-api
-              servicePort: 8080
+              service: 
+                name: user-api
+                port: 
+                  number: 8080
           - path: /product/
+            pathType: Prefix
             backend:
-              serviceName: product-api
-              servicePort: 8081
+              service: 
+                name: product-api
+                port: 
+                  number: 8081
           - path: /shopping/
+            pathType: Prefix
             backend:
-              serviceName: shopping-api
-              servicePort: 8082
+              service: 
+                name: shopping-api
+                port: 
+                  number: 8082
