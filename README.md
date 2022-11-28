@@ -30,6 +30,4 @@ A maneira mais simples de executar a aplicação é utilizando o docker-compose,
 
 ## Versões
 
-Eu utilizei a versão 2.3.0.RELEASE do Spring Boot para desenvolver a aplicação, pois ela era a versão mais recente quando escrevi o livro, quando for atualizar o livro vou atualizar a aplicação para a versão mais recente do Spring Boot.
-
-Eu desenvolvi a aplicação utilizando o Java 8, não deve haver grandes problemas na utilização de versões mais recentes do Java, mas talvez exista alguns pequenos problemas na portabilidade.
+As aplicações foram desenvolvidas com a versão 3.0.0 do Spring Boot e o Java 17.
